@@ -1,0 +1,7 @@
+- name: Display all variables/facts known for a host
+  debug:
+    var: hostvars
+    verbosity: 4
+
+# Actually ansible_distribution, ansible_distribution_version, ansible_distribution_major_version, ansible_os_family are not set, if ansible (2.7.7) is not capable of detecting a newer version of ubuntu (20.04) these variables are not set
+

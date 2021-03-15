@@ -1,0 +1,7 @@
+- import_tasks: "debug.yml"
+- import_tasks: "packages.yml"
+- import_tasks: "cloudcfg.yml"
+- import_tasks: "sshd.yml"
+- import_tasks: "timezone.yml"
+- import_tasks: "grub.yml"
+- import_tasks: "issue.yml"

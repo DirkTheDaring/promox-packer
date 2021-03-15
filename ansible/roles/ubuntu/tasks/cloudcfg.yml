@@ -1,0 +1,22 @@
+- name: Overwrite cloud-init's PermitRootLogin
+  # setting PermitRootLogin directly takes no effect as it will be
+  # overwritten during cloud-init
+  lineinfile:
+    path: /etc/cloud/cloud.cfg
+    regexp: '^(.*)disable_root:(.*)\d+(.*)'
+    backrefs: yes
+    line: '\g<1>disable_root:\g<2>0\g<3>'
+
+#- name: Overwrite cloud-init's PasswordAuthentication
+#  lineinfile:
+#    path: /etc/cloud/cloud.cfg
+#    regexp: '^(.*)ssh_pwauth:(.*)\d+(.*)'
+#    backrefs: yes
+#    line: '\g<1>ssh_pwauth:\g<2>1\g<3>'
+
+- name: Dont upgrade on boot
+  lineinfile:
+    dest: /etc/cloud/cloud.cfg
+    regexp: "^.*package-update-upgrade-install"
+    line: "# - package-update-upgrade-install"
+    state: present

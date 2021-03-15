@@ -1,0 +1,11 @@
+---
+- name: "Xxx"
+  blockinfile:
+    path: "/etc/issue"
+    marker: "################################################"
+    state: present
+    block: |
+      ipv4: \4
+      ipv6: \6
+      
+

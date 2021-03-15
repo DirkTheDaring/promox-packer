@@ -1,0 +1,43 @@
+#cloud-config
+# https://ubuntu.com/server/docs/install/autoinstall-reference
+# https://www.aerialls.io/posts/ubuntu-server-2004-image-packer-subiquity-for-proxmox/
+# username, password in identity section seems mandatory
+# but the user is created after the "late-commands", therefore
+# the user will be created there, so that we can assign an uid, gid,
+# which cannot provide in the cloud config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: en
+    variant: us
+  network:
+    network:
+      version: 2
+      ethernets:
+#        ens33:
+#        ens18:
+        {{ eth0_name }}:
+          dhcp4: true
+  storage:
+    layout:
+      name: lvm
+  identity:
+    hostname: ubuntu
+    username: {{ ssh_username }}
+    password: {{ ssh_password_hash }}
+  ssh:
+    install-server: yes
+#  package_update: true
+  packages:
+  - qemu-guest-agent
+  - haveged 
+  - python-apt
+#  user-data:
+#    disable_root: false
+
+  late-commands:
+    - chroot /target sh -c "useradd --create-home --shell /bin/bash --uid 65533 --gid 65534 {{ ssh_username }} && echo {{ ssh_username }}:{{ ssh_password }}|chpasswd"
+    - 'sed -i "s/dhcp4: true/&\n      dhcp-identifier: mac/" /target/etc/netplan/00-installer-config.yaml'
+    - echo '{{ ssh_username }} ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/{{ ssh_username }}
+    - chmod 440 /target/etc/sudoers.d/{{ ssh_username }}

@@ -1,0 +1,9 @@
+- name: install cloud-init
+  apt:
+    name: cloud-init
+    state: present
+    update_cache: yes
+
+- name: dist upgrade
+  apt:
+    upgrade: dist

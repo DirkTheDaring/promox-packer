@@ -1,0 +1,13 @@
+- name: Dont use DNS
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^UseDNS"
+    line: "UseDNS no"
+    state: present
+
+- name: Dont use GSSAPIAuthentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^GSSAPIAuthentication"
+    line: "GSSAPIAuthentication no"
+    state: present

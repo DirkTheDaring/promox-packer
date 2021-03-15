@@ -1,0 +1,4 @@
+default:
+  hosts:
+    ubuntu.fritz.box:
+      ansible_host: 192.168.178.207
