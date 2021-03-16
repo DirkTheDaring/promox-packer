@@ -110,6 +110,11 @@ variable "http_config_file" {
   type    = string
 }
 
+variable "http_config_ip" {
+  type    = string
+  default = "{{ .HTTPIP }}"
+}
+
 
 locals {
     boot_commands = {
@@ -119,7 +124,7 @@ locals {
             "<enter><wait>",
             "/install/vmlinuz initrd=/install/initrd.gz",
             " auto=true priority=critical",
-            " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/${var.preseed_cfg}",
+            " url=http://${var.http_config_ip}:{{ .HTTPPort }}/${var.preseed_cfg}",
             "<enter>"
         ]
         ubuntu_cloud_config = [

@@ -1,7 +1,7 @@
-iso_filename="mnt:iso/ubuntu-20.04.1-legacy-server-amd64.iso"
+iso_filename="local:iso/ubuntu-20.04.1-legacy-server-amd64.iso"
 
-proxmox_url="https://192.168.178.252:8006/api2/json"
-proxmox_node="pve"
+proxmox_url="https://denue6pr093:8006/api2/json"
+proxmox_node="denue6pr093"
 proxmox_username="root@pam"
 #proxmox_password="DO NOT SET IT HERE"
 
@@ -23,3 +23,4 @@ boot_command_type="ubuntu_preseed"
 eth0_name="ens33"
 http_config_dir="http"
 http_config_file="ubuntu.preseed.cfg"
+http_config_ip="10.243.180.20"
